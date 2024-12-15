@@ -4,16 +4,17 @@ import { useForm } from "react-hook-form";
 import { useAuth } from '../context/Authprovider';
 import { Link } from 'react-router-dom';
 const Login = () => {
+  const [authUser,setAuthUser]=useAuth();
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-   const [authUser,setAuthUser]=useAuth();
-    const onSubmit=(data)=>{
+   
+    const onSubmit=async (data)=>{
         const userInfo={
           email:data.email,
           password:data.password,
         };
         console.log(data);
         console.log(userInfo);
-        axios.post("api/user/login",userInfo)
+      await  axios.post("/api/user/login",userInfo)
         .then((response)=>{
           console.log(response.data);
           if(response.data){
