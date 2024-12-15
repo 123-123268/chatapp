@@ -1,30 +1,44 @@
-import React, { useEffect,useState } from 'react'
-import Cookies from 'js-cookie'
-import axios from 'axios'
+import React, { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import axios from "axios";
 
 const usegetalluser = () => {
- const [allusers, setallUsers] = useState([])
- const [loading, setloading] = useState(false)
- useEffect(()=>{
-        const getusers=async()=>{
-            setloading(true);
-            try {
-                const token=Cookies.get("jwt");
-             const response=   await axios.get("/api/user/allusers",{
-                    credentials:"include",
-                    headers:{
-                        "Authorization":`Bearer ${token}`
-                        }
-                })
-                setallUsers(response.data);
-                setloading(false);
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        getusers();
-    },[])
- return [allusers,loading]
-}
+  const [allusers, setAllUsers] = useState([]);
+  const [loading, setloading] = useState(false);
+  useEffect(() => {
+    const getusers = async () => {
+      setloading(true);
+      try {
+        const token = Cookies.get("jwt");
 
-export default usegetalluser
+        
+
+        if (!token) {
+          console.error("JWT token is missing");
+          setloading(false);
+        }
+        const response = await axios.get("/api/user/allusers", {
+            withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (response && response.data) {
+            setAllUsers(response.data);
+            
+          } else {
+            console.error("Response is undefined or does not contain data");
+          }
+          
+      } catch (error) {
+        console.log("error in this is"+error);
+      } finally {
+        setloading(false);
+      }
+    };
+    getusers();
+  }, []);
+  return [allusers, loading];
+};
+
+export default usegetalluser;
