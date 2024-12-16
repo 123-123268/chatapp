@@ -26,7 +26,7 @@ catch(error){
     console.log(error);
 }
 app.use('/api/user',userRouter);
-app.use("/api/message",secureroute,messageRouter);
+app.use("/api/message",messageRouter);
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })

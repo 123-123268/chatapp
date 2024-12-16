@@ -25,7 +25,7 @@ const Signup = () => {
     console.log(data);
     console.log(userInfo);
     await axios.post("/api/user/signup",userInfo)
-    .then((response)=>{
+    .then((response)=>{  
       console.log(response.data);
       if(response.data){
         alert("signup successfull!");

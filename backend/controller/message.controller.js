@@ -4,8 +4,8 @@ export const sendMessage = async (req, res) => {
   //   console.log("messagesend");
   try {
     const message = req.body.message;
-    const senderId = req.user._id;
-    const { id: receiverId } = req.params;
+    const senderId = req.body._id;
+    const receiverId= req.params.id;
 
     // const conversationId=req.body.conversationId;
     let conversation = await Conversation.findOne({
@@ -36,8 +36,8 @@ export const sendMessage = async (req, res) => {
 };
 export const getMessage = async (req, res) => {
   try {
-    const senderId = req.user._id;
-    const { id: chatUser } = req.params;
+    const senderId = req.params.senderId; 
+    const chatUser  = req.params.chatUserId;
     let conversation = await Conversation.findOne({
       members: { $all: [senderId, chatUser] },
     }).populate("messages");

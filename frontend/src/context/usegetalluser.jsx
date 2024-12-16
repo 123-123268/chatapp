@@ -9,19 +9,26 @@ const usegetalluser = () => {
     const getusers = async () => {
       setloading(true);
       try {
-         const token = Cookies.get('jwt');
+      //    const token = Cookies.get('jwt');
         
-      console.log(token);
-        if (!token) {
-          console.log("JWT token is missing");
-          setloading(false);
-        }
-        const response = await axios.get("/api/user/allusers", {
-          withCredentials: true,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+      // console.log(token);
+      //   if (!token) {
+      //     console.log("JWT token is missing");
+      //     setloading(false);
+      //   }
+      const loggedinUser = JSON.parse(localStorage.getItem("ChatApp"));
+      const loggedinId = loggedinUser?.user._id; // Safe optional chaining
+
+      console.log(loggedinId)
+        const response = await axios.get(`/api/user/allUsers/${loggedinId}`
+        //   ,
+        //    {
+        //   withCredentials: true,
+        //   headers: {
+        //     Authorization: `Bearer ${token}`,
+        //   },
+        // }
+      );
         if (response && response.data) {
             setAllUsers(response.data);
             
