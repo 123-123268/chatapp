@@ -9,16 +9,15 @@ const usegetalluser = () => {
     const getusers = async () => {
       setloading(true);
       try {
-        const token = Cookies.get("jwt");
-
+         const token = Cookies.get('jwt');
         
-
+      console.log(token);
         if (!token) {
-          console.error("JWT token is missing");
+          console.log("JWT token is missing");
           setloading(false);
         }
         const response = await axios.get("/api/user/allusers", {
-            withCredentials: true,
+          withCredentials: true,
           headers: {
             Authorization: `Bearer ${token}`,
           },

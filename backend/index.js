@@ -4,9 +4,15 @@ import mongoose from "mongoose";
 import cors from "cors";
 import userRouter from "./routes/user.route.js";
 import cookieParser from "cookie-parser";
+import messageRouter from "./routes/message.route.js";
+import secureroute from "./middleware/secureroute.js";
 const app = express()
+
+app.use(cors({
+  origin: 'http://localhost:3001', // Frontend URL
+  credentials: true, // Allow cookies to be sent
+}));
 app.use(cookieParser());
-app.use(cors());
 app.use(express.json());
 dotenv.config();
 
@@ -20,6 +26,7 @@ catch(error){
     console.log(error);
 }
 app.use('/api/user',userRouter);
+app.use("/api/message",secureroute,messageRouter);
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
