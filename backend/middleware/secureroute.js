@@ -9,7 +9,7 @@ const secureroute = async (req, res, next) => {
 
     const decoded = jwt.verify(token, process.env.JWT_TOKEN);
 
-    if (!decoded) {
+    if (!decoded) { 
       return res.status(401).send("Access denied. Invalid token");
     }
     const user = await User.findById(decoded.userId).select("-password");

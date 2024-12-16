@@ -28,7 +28,7 @@ export const signin = async (req, res) => {
     await newUser.save();
 
     if (newUser) {
-      createTokenandSaveCookie(newUser._id, res);
+      // createTokenandSaveCookie(newUser._id, res);
       res.status(201).json({ message: "User create successfully", user:{fullname:newUser.fullname,email:newUser.email,_id:newUser._id} });
     }
   } catch (error) {
@@ -44,7 +44,7 @@ export const login = async (req, res) => {
     if (!user || !isMatch) {
       return res.status(400).json({ message: "invalid credentials" });
     }
-    createTokenandSaveCookie(user._id, res);
+    // createTokenandSaveCookie(user._id, res);
     res.status(200).json({
       message: "User login successfully",
       user: {
@@ -60,7 +60,7 @@ export const login = async (req, res) => {
 }; 
 export const logout = async (req, res) => {
   try {
-    res.clearCookie("jwt");
+    // res.clearCookie("jwt");
     res.status(201).json({ message: "User logout successfully" });
   } catch (error) {
     console.log(error);
@@ -69,8 +69,9 @@ export const logout = async (req, res) => {
 };
 export const allUsers=async(req,res)=>{
   try {
-    const logginedUser=req.user._id;
-
+    // const logginedUser=req.user._id;
+    const logginedUser=req.params.id;
+    console.log(logginedUser);
     const filteredusers = await User.find({_id:{$ne: logginedUser}}).select("-password");
     res.status(200).json( filteredusers );
     } catch (error) {

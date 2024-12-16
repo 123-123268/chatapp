@@ -10,7 +10,7 @@ const Logout = () => {
    try {
    const response= await axios.post("/api/user/logout");
    localStorage.removeItem("ChatApp");
-   Cookies.remove("jwt");
+  //  Cookies.remove("jwt");
    setloading(false);
    alert("logout successfully");
    window.location.reload();
