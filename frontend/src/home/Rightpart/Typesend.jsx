@@ -1,6 +1,8 @@
 import React from 'react'
 import { IoSend } from "react-icons/io5";
+import useSendMessage from '../../context/useSendMessage.js';
 const Typesend = () => {
+  const {}=useSendMessage();
   return (
     <div className='flex space-x-1 h-[8vh]  bg-gray-800'>
     <div className='w-[70%] mx-4 my-1'>
