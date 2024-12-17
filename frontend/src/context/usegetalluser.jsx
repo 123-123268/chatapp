@@ -18,8 +18,6 @@ const usegetalluser = () => {
       //   }
       const loggedinUser = JSON.parse(localStorage.getItem("ChatApp"));
       const loggedinId = loggedinUser?.user._id; // Safe optional chaining
-
-      console.log(loggedinId)
         const response = await axios.get(`/api/user/allUsers/${loggedinId}`
         //   ,
         //    {

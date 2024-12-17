@@ -1,9 +1,13 @@
 import React from 'react'
 import useConversation from '../../Zustand/useConversation'
-
+import { useSocketContext } from '../../context/SocketContext';
 const Chatuser = () => {
   const{selectedConversation}=useConversation();
   console.log(selectedConversation);
+  const {onlineUsers}=useSocketContext();
+  const getOnlineUsersStatus=(userId)=>{
+    return onlineUsers.includes(userId)?"Online":"Offline";
+  }
   return (
     <div className='flex space-x-3 items-center justify-center h-[8vh] bg-gray-800 hover:bg-gray-700 duration-300'>
       <div className="avatar online">
@@ -13,7 +17,7 @@ const Chatuser = () => {
 </div>
 <div>
     <h1 className='text-xl'>{`${selectedConversation.fullname}`}</h1>
-    {/* <span className='text-sm'>Offline</span> */}
+    <span className='text-sm'>{getOnlineUsersStatus(selectedConversation._id)}</span>
 </div>
     </div>
   )

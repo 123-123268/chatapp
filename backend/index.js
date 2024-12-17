@@ -6,7 +6,7 @@ import userRouter from "./routes/user.route.js";
 import cookieParser from "cookie-parser";
 import messageRouter from "./routes/message.route.js";
 import secureroute from "./middleware/secureroute.js";
-const app = express()
+import { app, server } from "./SocketIo/server.js";
 
 app.use(cors({
   origin: 'http://localhost:3001', // Frontend URL
@@ -27,6 +27,6 @@ catch(error){
 }
 app.use('/api/user',userRouter);
 app.use("/api/message",messageRouter);
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
