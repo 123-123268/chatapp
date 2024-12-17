@@ -1,6 +1,7 @@
 import React from "react";
-
-
+import { useState } from "react";
+import useConversation from "../Zustand/useConversation.js";
+import axios from 'axios';
 const useSendMessage = () => {
     const [loading, setLoading] = useState(false);
     const { messages, setMessages, selectedConversation } = useConversation();
@@ -8,19 +9,20 @@ const useSendMessage = () => {
     const loggedinId = loggedinUser?.user._id; 
 
   
-    const sendMessages = async ({ message }) => {
+    const sendMessages = async ( message ) => {
       setLoading(true);
       try {
         const response = await axios.post(
           `http://localhost:3001/api/message/send/${selectedConversation._id}`,{
-            body:{
-                "_id":loggedinId,
-                "message":message,
-            }
+           
+                _id:loggedinId,
+                message:message,
+            
           }
         );
         console.log("after", selectedConversation._id);
-        setMessages(...messages,response.data);
+        console.log(response.data);
+        setMessages([...messages,response.data.newMessage]);
         setLoading(false);
       } catch (error) {
         console.log("Error in sending messages: ", error);
