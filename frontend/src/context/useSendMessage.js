@@ -16,16 +16,18 @@ const useSendMessage = () => {
           `http://localhost:3001/api/message/send/${selectedConversation._id}`,{
            
                 _id:loggedinId,
-                message:message,
+                message:message, 
             
           }
         );
-        console.log("after", selectedConversation._id);
-        console.log(response.data);
         setMessages([...messages,response.data.newMessage]);
         setLoading(false);
       } catch (error) {
-        console.log("Error in sending messages: ", error);
+        console.error('Error in sending messages:', error.response ? error.response.data : error.message)
+        if (error.response) {
+          console.log("Status:", error.response.status);
+          console.log("Data:", error.response.data);
+        }
         setLoading(false);
       }
     };

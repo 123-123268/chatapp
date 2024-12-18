@@ -3,7 +3,6 @@ import useConversation from '../../Zustand/useConversation'
 import { useSocketContext } from '../../context/SocketContext';
 const Chatuser = () => {
   const{selectedConversation}=useConversation();
-  console.log(selectedConversation);
   const {onlineUsers}=useSocketContext();
   const getOnlineUsersStatus=(userId)=>{
     return onlineUsers.includes(userId)?"Online":"Offline";
