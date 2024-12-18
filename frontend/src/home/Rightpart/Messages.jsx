@@ -3,9 +3,10 @@ import Message from "./Message";
 import useGetMessage from "../../context/useGetMessage.js";
 import Loading from "../../components/Loading.jsx";
 import { useRef } from "react";
+import useGetSocketMessage from "../../context/useGetSocketMessage.js";
 const Messages = () => {
   const { loading, messages } = useGetMessage();
-  console.log(messages);
+  useGetSocketMessage();//listining incoming messages
   const lastMessage = useRef();
   useEffect(() => {
     setTimeout(() => {
@@ -21,7 +22,7 @@ const Messages = () => {
       ) : (
         messages.length > 0 &&
         messages.map((message) => (
-          <div key={message._id} ref={lastMessage}>
+         <div key={message._id} ref={lastMessage}>
             <Message key={message._id} message={message} />
           </div>
           
