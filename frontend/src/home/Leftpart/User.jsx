@@ -12,7 +12,7 @@ const User = ({ user }) => {
       <div className="flex space-x-4 px-8 py-3 hover:bg-slate-700 duration-300 cursor-pointer">
         <div className={`avatar ${isOnline?"online":""}`}>
           <div className="w-12 rounded-full">
-            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6hEUaF_RzuWqQjqmJ-Xma7HN9MVyiIMO8JA&s" />
           </div>
         </div>
         <div>
