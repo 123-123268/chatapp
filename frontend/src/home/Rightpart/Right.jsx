@@ -3,6 +3,7 @@ import Chatuser from "./Chatuser";
 import Messages from "./Messages";
 import Typesend from "./Typesend";
 import useConversation from "../../Zustand/useConversation.js";
+import { CiMenuFries } from "react-icons/ci";
 
 import { useAuth } from "../../context/Authprovider.jsx";
 const Right = () => {
@@ -11,12 +12,12 @@ const Right = () => {
     return setSelectedConversation(null);
   }, [setSelectedConversation]);
   return (
-   < div className="w-[70%] text-gray-300 bg-slate-900">
-    <div>
-      {!selectedConversation ? (
-        <Nochatselected />
-      ) : (
-        <>
+    <div className="w-full text-gray-300 bg-slate-900">
+      <div>
+        {!selectedConversation ? (
+          <Nochatselected />
+        ) : (
+          <>
             <Chatuser />
             <div
               className=" overflow-y-auto"
@@ -26,11 +27,10 @@ const Right = () => {
             </div>
 
             <Typesend />
-          
-        </>
-      )}
+          </>
+        )}
+      </div>
     </div>
-   </div>
   );
 };
 
@@ -40,13 +40,23 @@ const Nochatselected = () => {
   const [authUser] = useAuth();
   return (
     <>
-      <div className="flex h-screen items-center text-center justify-center">
-        <h1 className="text-center">
-          Welcome {""}
-          <span className="font-semibold text-xl">{authUser.user.fullname}</span>
-          <br />
-          No chat selected,please start conversation by selecting anyone.
-        </h1>
+      <div className="relative">
+        <label
+          htmlFor="my-drawer-2"
+          className="btn btn-ghost drawer-button lg:hidden absolute left-5"
+        >
+          <CiMenuFries className="text-white" />
+        </label>
+        <div className="flex h-screen items-center text-center justify-center">
+          <h1 className="text-center">
+            Welcome {""}
+            <span className="font-semibold text-xl">
+              {authUser.user.fullname}
+            </span>
+            <br />
+            No chat selected,please start conversation by selecting anyone.
+          </h1>
+        </div>
       </div>
     </>
   );

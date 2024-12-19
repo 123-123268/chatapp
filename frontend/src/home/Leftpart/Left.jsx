@@ -6,7 +6,7 @@ import Messages from './../Rightpart/Messages'
 
 const Left = () => {
   return (
-    <div className='w-[30%] text-gray-300 bg-black'>
+    <div className='w-full text-gray-300 bg-black'>
       <Search/>
       <div className= 'flex-1 overflow-y-auto' style={{minHeight:"calc(84vh - 10vh)"}}>
       <Users/>
