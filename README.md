@@ -56,8 +56,6 @@ SOCKET_SERVER=http://localhost:5000
 3️⃣ See real-time messages in the chat window
 4️⃣ Logout anytime
 
-🚀 Deployment
-Frontend: Deployed on Vercel/Netlify
-Backend: Hosted on Render/Heroku
+
 🤝 Contribution
 Feel free to fork, modify, and submit PRs!
