@@ -8,28 +8,45 @@ const Login = () => {
   const [authUser,setAuthUser]=useAuth();
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
    
-    const onSubmit=async (data)=>{
-        const userInfo={
-          email:data.email,
-          password:data.password,
-        };
-        console.log(data);
-        console.log(userInfo);
-      await  axios.post("/api/user/login",userInfo)
-        .then((response)=>{
-          console.log(response.data);
-          if(response.data){
-            toast.success("login successfull!");
-          }
-          localStorage.setItem("ChatApp",JSON.stringify(response.data));
-          setAuthUser(response.data);
-        })
-        .catch((error)=>{
-          if(error.response){
-            toast.error("Error:" + error.response.data.message);
-          }
-        })
-      }
+  const onSubmit = async (data) => {
+  const userInfo = {
+    email: data.email,
+    password: data.password,
+  };
+
+  console.log("User info submitted:", userInfo);
+
+  const BASE_URL =
+    window.location.hostname === "localhost"
+      ? "http://localhost:3001"
+      : "https://chatapp-backenf.onrender.com";
+
+  try {
+    console.log("sending login to backend")
+    const response = await axios.post(`${BASE_URL}/api/user/login`, userInfo, {
+      withCredentials: true,
+    });
+    console.log("received")
+
+    console.log("Login response (FULL):", response);         // 👈 prints full response
+    console.log("Login response (data):", response.data);     // 👈 prints data part
+    console.log("Login response (user):", response.data?.user); // 👈 check if user exists
+
+    if (response.data?.user) {
+      toast.success("Login successful!");
+      localStorage.setItem("ChatApp", JSON.stringify(response.data.user));
+      setAuthUser(response.data.user);
+    }
+  } catch (error) {
+    console.error("Login error:", error);
+    if (error.response) {
+      console.error("Server error:", error.response.data);
+      toast.error("Error: " + error.response.data.message);
+    }
+  }
+};
+
+
   return (
     <div className='flex h-screen items-center justify-center bg-gray-800 text-white '>
       <form onSubmit={handleSubmit(onSubmit)} className='border border-white p-6 rounded-xl min-w-[24%] space-y-3'> 

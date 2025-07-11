@@ -7,11 +7,25 @@ import cookieParser from "cookie-parser";
 import messageRouter from "./routes/message.route.js";
 import secureroute from "./middleware/secureroute.js";
 import { app, server } from "./SocketIo/server.js";
+// Allow multiple origins
+const allowedOrigins = [
+  "https://chatapp-frontend-ay66.onrender.com",
+  "http://localhost:3001",
+];
 
 app.use(cors({
-  origin: 'https://chatapp-frontend-ay66.onrender.com', // Frontend URL
-  credentials: true, // Allow cookies to be sent
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps, curl, etc.)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
 }));
+
 app.use(cookieParser());
 app.use(express.json());
 dotenv.config();
