@@ -34,8 +34,8 @@ const Login = () => {
 
     if (response.data?.user) {
       toast.success("Login successful!");
-      localStorage.setItem("ChatApp", JSON.stringify(response.data.user));
-      setAuthUser(response.data.user);
+      localStorage.setItem("ChatApp", JSON.stringify(response.data));
+      setAuthUser(response.data);
     }
   } catch (error) {
     console.error("Login error:", error);
