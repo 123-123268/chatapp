@@ -13,7 +13,7 @@ function useGetMessage() {
             setLoading(true);
             if(selectedConversation && selectedConversation._id){
                 try{
-                    const response=await axios.get(`http://localhost:3001/api/message/get/${loggedinId}/${selectedConversation._id}`);
+                    const response=await axios.get(`https://chatapp-backenf.onrender.com/api/message/get/${loggedinId}/${selectedConversation._id}`);
                     setMessages(response.data);
                     setLoading(false);
                 }
