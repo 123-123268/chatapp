@@ -13,7 +13,7 @@ const useSendMessage = () => {
       setLoading(true);
       try {
         const response = await axios.post(
-          `http://localhost:3001/api/message/send/${selectedConversation._id}`,{
+          `https://chatapp-backenf.onrender.com/api/message/send/${selectedConversation._id}`,{
            
                 _id:loggedinId,
                 message:message, 
