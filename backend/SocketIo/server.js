@@ -5,12 +5,25 @@ import express from 'express'
 const app = express();
 
 const server=http.createServer(app);
-const io =new Server(server,{
-    cors: {
-        origin: "https://chatapp-frontend-ay66.onrender.com",
-        methods: ["GET", "POST"],
-      
-    }
+// Allow multiple origins
+const io = new Server(server, {
+  cors: {
+    origin: (origin, callback) => {
+      const allowedOrigins = [
+        "https://chatapp-frontend-ay66.onrender.com",
+        "http://localhost:3001"
+      ];
+
+      // If origin is undefined (like in Postman or curl), allow it
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST"],
+    credentials: true,
+  }
 });
 //realtimemess
 export const getRecieverSocketId=(recieverId)=>{

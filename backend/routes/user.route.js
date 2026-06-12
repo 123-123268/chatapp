@@ -8,4 +8,4 @@ userRouter.post("/signup",signin);
 userRouter.post("/login",login);
 userRouter.post("/logout",logout); 
 userRouter.get("/allUsers/:id", allUsers);
-export default userRouter;
+export default userRouter; 

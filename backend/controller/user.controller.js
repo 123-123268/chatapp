@@ -77,7 +77,7 @@ export const logout = async (req, res) => {
     res.status(201).json({ message: "User logout successfully" });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ mesage: "error something went wrong" });
+    res.status(500).json({ mesage: "error something went wrong" }); 
   }
 };
 export const allUsers=async(req,res)=>{
