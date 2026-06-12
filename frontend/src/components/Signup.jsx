@@ -16,30 +16,47 @@ const Signup = () => {
     return value===password || "password do not match"
   }
 
-  const onSubmit=async (data)=>{
-    const userInfo={
-      fullname:data.fullname,
-      email:data.email,
-      password:data.password,
-      confirmPassword:data.confirmPassword,
-    };
-    console.log(data);
-    console.log(userInfo);
-    await axios.post("/api/user/signup",userInfo)
-    .then((response)=>{  
-      console.log(response.data);
-      if(response.data){
-        toast.success("signup successfull!");
+  const onSubmit = async (data) => {
+  const userInfo = {
+    fullname: data.fullname,
+    email: data.email,
+    password: data.password,
+    confirmPassword: data.confirmPassword,
+  };
+
+  console.log("Signup data:", userInfo);
+
+  const BASE_URL =
+    window.location.hostname === "localhost"
+      ? "http://localhost:3001"
+      : "https://chatapp-backenf.onrender.com";
+
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/api/user/signup`,
+      userInfo,
+      {
+        withCredentials: true,
       }
-      localStorage.setItem("ChatApp",JSON.stringify(response.data));
-      setAuthUser(response.data) 
-    })
-    .catch((error)=>{
-      if(error.response){
-        toast.error("Error:" + error.response.data.message);
-      }
-    })
+    );
+
+    console.log("Signup response:", response.data);
+
+    if (response.data) {
+      toast.success("Signup successful!");
+      localStorage.setItem("ChatApp", JSON.stringify(response.data));
+      setAuthUser(response.data);
+    }
+  } catch (error) {
+    console.error("Signup error:", error);
+
+    if (error.response) {
+      toast.error("Error: " + error.response.data.message);
+    } else {
+      toast.error("Something went wrong");
+    }
   }
+};
   return (
     <div className='flex h-screen items-center justify-center bg-gray-800 text-white '>
       <form onSubmit={handleSubmit(onSubmit)} className='border border-white p-6 rounded-xl min-w-[24%] space-y-3'> 
