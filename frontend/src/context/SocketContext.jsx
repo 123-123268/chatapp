@@ -13,7 +13,7 @@ export const SocketProvider = ({ children }) => {
   const [onlineUsers,setOnlineUsers]=useState([]);
   useEffect(() => {
     if (authUser) {
-      const socket = io("http://localhost:3000", {
+      const socket = io("https://chatapp-backenf.onrender.com", {
         query: {
           userId: authUser.user._id,
         },

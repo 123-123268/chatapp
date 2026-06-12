@@ -9,7 +9,7 @@ import secureroute from "./middleware/secureroute.js";
 import { app, server } from "./SocketIo/server.js";
 
 app.use(cors({
-  origin: 'http://localhost:3001', // Frontend URL
+  origin: 'https://chatapp-frontend-ay66.onrender.com', // Frontend URL
   credentials: true, // Allow cookies to be sent
 }));
 app.use(cookieParser());

@@ -38,13 +38,24 @@ export const signin = async (req, res) => {
 };
 export const login = async (req, res) => {
   const { email, password } = req.body;
+
   try {
     const user = await User.findOne({ email });
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!user || !isMatch) {
-      return res.status(400).json({ message: "invalid credentials" });
+
+    if (!user) {
+      return res.status(400).json({
+        message: "Invalid credentials",
+      });
     }
-    // createTokenandSaveCookie(user._id, res);
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(400).json({
+        message: "Invalid credentials",
+      });
+    }
+
     res.status(200).json({
       message: "User login successfully",
       user: {
@@ -55,9 +66,11 @@ export const login = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ mesage: "error something went wrong" });
+    res.status(500).json({
+      message: error.message,
+    });
   }
-}; 
+};
 export const logout = async (req, res) => {
   try {
     // res.clearCookie("jwt");
