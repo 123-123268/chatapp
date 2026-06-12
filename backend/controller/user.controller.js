@@ -32,9 +32,12 @@ export const signin = async (req, res) => {
       res.status(201).json({ message: "User create successfully", user:{fullname:newUser.fullname,email:newUser.email,_id:newUser._id} });
     }
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ mesage: "error something went wrong" });
-  }
+  console.error("Signup Error:", error);
+
+  res.status(500).json({
+    message: error.message,
+  });
+}
 };
 export const login = async (req, res) => {
   const { email, password } = req.body;

@@ -1,11 +1,10 @@
-import express from "express"
+import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
 import userRouter from "./routes/user.route.js";
 import cookieParser from "cookie-parser";
 import messageRouter from "./routes/message.route.js";
-import secureroute from "./middleware/secureroute.js";
 import { app, server } from "./SocketIo/server.js";
 // Allow multiple origins
 const allowedOrigins = [
@@ -13,34 +12,45 @@ const allowedOrigins = [
   "http://localhost:3001",
 ];
 
-app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps, curl, etc.)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    } else {
-      return callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true,
-}));
+dotenv.config();
+
+app.use(
+  cors({
+    origin: "https://chatapp-frontend-ay66.onrender.com",
+    credentials: true,
+  })
+);
 
 app.use(cookieParser());
 app.use(express.json());
-dotenv.config();
 
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
-try{
-    mongoose.connect(process.env.MONGODB_URI);
-    console.log("connected to the database!");
-}
-catch(error){
-    console.log(error);
-}
-app.use('/api/user',userRouter);
-app.use("/api/message",messageRouter);
-server.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+// Database Connection
+const connectDB = async () => {
+  try {
+    console.log("Mongo URI exists:", !!process.env.MONGODB_URI);
+
+    await mongoose.connect(process.env.MONGODB_URI);
+
+    console.log("Connected to MongoDB");
+  } catch (error) {
+    console.error("MongoDB Connection Error:", error);
+    process.exit(1);
+  }
+};
+
+// Routes
+app.use("/api/user", userRouter);
+app.use("/api/message", messageRouter);
+
+// Start Server
+const startServer = async () => {
+  await connectDB();
+
+  server.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+  });
+};
+
+startServer();
