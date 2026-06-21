@@ -16,7 +16,7 @@ dotenv.config();
 
 app.use(
   cors({
-    origin: "https://chatapp-frontend-ay66.onrender.com",
+    origin: allowedOrigins,
     credentials: true,
   })
 );
