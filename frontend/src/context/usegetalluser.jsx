@@ -19,7 +19,9 @@ const usegetalluser = () => {
       const backend_url="https://chatapp-backenf.onrender.com"
       const loggedinUser = JSON.parse(localStorage.getItem("ChatApp"));
       const loggedinId = loggedinUser?.user._id; // Safe optional chaining
-        const response = await axios.get(`${backend_url}/api/user/allUsers/${loggedinId}`
+        const response = await axios.get(
+          `http://localhost:3000/api/user/allUsers/${loggedinId}`
+          // `${backend_url}/api/user/allUsers/${loggedinId}`
         //   ,
         //    {
         //   withCredentials: true,
