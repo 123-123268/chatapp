@@ -1,61 +1,111 @@
-Chat App
-A real-time chat application built using MERN stack and Socket.io.
+# Real-Time Chat Application
 
-🚀 Features
-✅ Real-time messaging with Socket.io
-✅ User authentication (Sign-in/Sign-out)
-✅ Online/offline user status tracking
-✅ Group and one-on-one chat support
-✅ Responsive UI (Daisy UI/Tailwind CSS)
-✅ API integration with Postman for testing
-
-🛠️ Tech Stack
-Frontend: React.js, Tailwind CSS, Daisy UI, Axios
-Backend: Node.js, Express.js, MongoDB
-Real-time Communication: Socket.io
-Authentication: JWT, bcrypt.js
-Testing & API: Postman
+A full-stack real-time messaging platform built using React, Node.js, Express, Socket.IO, Zustand, and MongoDB, enabling instant communication between users through WebSocket-based connections.
 
 
-🔧 Installation
-1️⃣ Clone the Repository
-sh
-Copy
-Edit
-git clone https://github.com/yourusername/chat-app.git
-cd chat-app
-2️⃣ Install Dependencies
-Frontend
-sh
-Copy
-Edit
+## Features
+
+- Real-time messaging using Socket.IO and WebSockets
+- Instant message synchronization across connected clients
+- User authentication and authorization
+- Online/offline user presence indicators
+- Typing indicators
+- Persistent chat history using MongoDB
+- Global state management using Zustand
+- Responsive and user-friendly interface
+
+---
+
+## Tech Stack
+
+| Category | Technologies |
+|----------|--------------|
+| Frontend | React |
+| Backend | Node.js, Express |
+| Real-Time Communication | Socket.IO, WebSockets |
+| State Management | Zustand |
+| Database | MongoDB |
+| Development Tools | Nodemon, postman|
+
+---
+
+## Application Screenshots
+
+### Login Page
+
+<p align="center">
+  <img src="public/login.png" width="800">
+</p>
+
+### Chat Interface
+
+<p align="center">
+  <img src="public/chat.png" width="800">
+</p>
+
+### User List
+
+<p align="center">
+  <img src="public/users.png" width="800">
+</p>
+
+---
+
+## Running Locally
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/your-username/chat-application.git
+cd chat-application
+```
+
+### 2. Start the Frontend
+
+Open a terminal and run:
+
+```bash
 cd frontend
 npm install
-npm start
-Backend
-sh
-Copy
-Edit
+npm run dev
+```
+
+### 3. Start the Backend
+
+Open another terminal and run:
+
+```bash
 cd backend
 npm install
-npm start
-3️⃣ Set up Environment Variables
-Create a .env file in the backend folder and add:
+nodemon index.js
+```
 
-ini
-Copy
-Edit
-PORT=5000
-MONGO_URI=your_mongodb_url
-JWT_SECRET=your_secret_key
-SOCKET_SERVER=http://localhost:5000
+> Make sure MongoDB is running locally or configure the appropriate MongoDB connection string in your environment variables.
 
-📌 Usage
-1️⃣ Sign up & log in
-2️⃣ Start a chat with another user
-3️⃣ See real-time messages in the chat window
-4️⃣ Logout anytime
+---
 
+## Project Structure
 
-🤝 Contribution
-Feel free to fork, modify, and submit PRs!
+```text
+chat-application/
+├── frontend/
+│   ├── src/
+│   └── ...
+├── backend/
+│   ├── models/
+│   ├── routes/
+│   ├── socket/
+│   └── index.js
+└── README.md
+```
+
+---
+
+## Future Improvements
+
+- Group chat functionality
+- Read receipts
+- Message reactions
+- File and image sharing
+- Push notifications
+- End-to-end encryption
