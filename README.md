@@ -34,19 +34,13 @@ A full-stack real-time messaging platform built using React, Node.js, Express, S
 ### Login Page
 
 <p align="center">
-  <img src="public/login.png" width="800">
+  <img src="frontend/public/login.png" width="800">
 </p>
 
 ### Chat Interface
 
 <p align="center">
-  <img src="public/chat.png" width="800">
-</p>
-
-### User List
-
-<p align="center">
-  <img src="public/users.png" width="800">
+  <img src="frontend/public/chat-interface.png" width="800">
 </p>
 
 ---
